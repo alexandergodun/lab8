@@ -1,47 +1,42 @@
 package Pages;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
 
-public class Recall extends AbstractPage{
-    private final String BASE_URL = "https://www.onliner.by";
+public class recall extends abstractPage{
 
-
-    public Recall(WebDriver driver)
-    {
+    public recall(WebDriver driver) {
         super(driver);
         PageFactory.initElements(this.driver, this);
     }
-    @Override
     public void openPage(String URL)
     {
         driver.navigate().to(URL);
     }
 
-    public void Recall(String username,String password,String text)
-    {
-        driver.findElement(By.cssSelector("div.auth-bar__item.auth-bar__item--text")).click();
-        driver.findElement(By.cssSelector("input.auth-box__input")).clear();
-        driver.findElement(By.cssSelector("input.auth-box__input")).sendKeys(username);
-        driver.findElement(By.xpath("//input[@type='password']")).click();
-        driver.findElement(By.xpath("//input[@type='password']")).clear();
-        driver.findElement(By.xpath("//input[@type='password']")).sendKeys(password);
-        driver.findElement(By.xpath("(//button[@type='submit'])[2]")).click();
-        driver.findElement(By.cssSelector("#widget-61 > a.b-tile-main > h3.b-tile-header > span.txt.max-lines-4")).click();
-        driver.findElement(By.xpath("(//textarea[@name='message'])[2]")).click();
-        driver.findElement(By.xpath("(//textarea[@name='message'])[2]")).click();
-        driver.findElement(By.xpath("(//textarea[@name='message'])[2]")).clear();
-        driver.findElement(By.xpath("(//textarea[@name='message'])[2]")).sendKeys(text);
-        driver.findElement(By.xpath("//div[@id='container']/div/div[2]/div/div/div[2]/div/div/form[2]/div/div[3]/button")).click();
+    public void Recall(String username,String password) {
+        driver.findElement(By.linkText("Войти")).click();
+        driver.findElement(By.id("email")).clear();
+        driver.findElement(By.id("email")).sendKeys(username);
+        driver.findElement(By.id("pass")).clear();
+        driver.findElement(By.id("pass")).sendKeys(password);
+        driver.findElement(By.id("send2")).click();
 
+        driver.findElement(By.cssSelector("a.level-top > span")).click();
+        driver.findElement(By.cssSelector("button.button.btn-cart")).click();
+        driver.findElement(By.cssSelector("#tab-tabreviews > a")).click();
+        driver.findElement(By.id("nickname_field")).clear();
+        driver.findElement(By.id("nickname_field")).sendKeys("-");
+        driver.findElement(By.id("Оценка (Рейтинг):_5")).click();
+        driver.findElement(By.id("summary_field")).clear();
+        driver.findElement(By.id("summary_field")).sendKeys("-");
+        driver.findElement(By.id("review_field")).clear();
+        driver.findElement(By.id("review_field")).sendKeys("-");
+        driver.findElement(By.cssSelector("div.buttons-set > button.button")).click();
     }
-
-
-
     public boolean isRecall(){
         boolean recInIsTrue=false;
-        if(driver.findElement(By.cssSelector("#last_comment > strong.author > a")).getText().contains("automation_test")) recInIsTrue=true;
+        if ((driver.findElement(By.className("page-title title-buttons")).getText().contains("Отзыв оставлен"))) recInIsTrue=true;
         return  recInIsTrue;
     }
 }

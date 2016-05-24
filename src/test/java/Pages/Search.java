@@ -2,15 +2,11 @@ package Pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.Select;
 
-public class Search extends AbstractPage{
-    private final String BASE_URL = "https://www.onliner.by";
+public class search extends abstractPage{
 
-
-    public Search(WebDriver driver)
+    public search(WebDriver driver)
     {
         super(driver);
         PageFactory.initElements(this.driver, this);
@@ -21,18 +17,14 @@ public class Search extends AbstractPage{
         driver.navigate().to(URL);
     }
 
-    public void Search(String searcworld)
-    {
-        driver.findElement(By.name("query")).click();
-        driver.findElement(By.name("query")).clear();
-        driver.findElement(By.name("query")).sendKeys(searcworld);
-
+    public void search(String searchworld) {
+        driver.findElement(By.id("search")).clear();
+        driver.findElement(By.id("search")).sendKeys(searchworld);
+        driver.findElement(By.cssSelector("button.button")).click();
     }
-
     public boolean isSearch(){
         boolean serInIsTrue=false;
-        if(driver.findElement(By.linkText("Холодильники")).isDisplayed()) serInIsTrue=true;
+        if(driver.findElement(new By.ByClassName("page-title")).isDisplayed()) serInIsTrue=true;
         return  serInIsTrue;
     }
-
-    }
+}
